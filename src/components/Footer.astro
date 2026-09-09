@@ -33,8 +33,9 @@ import LogoMark from './LogoMark.astro';
   .store-link {
     display: flex; align-items: center; gap: 10px; border: 1px solid rgba(237, 225, 203, .22);
     border-radius: 12px; padding: 10px 18px;
+    transition: transform .2s cubic-bezier(.2,.8,.2,1), border-color .2s;
   }
-  .store-link:hover { border-color: var(--gold); }
+  .store-link:hover { border-color: var(--gold); transform: translateY(-2px); }
   .store-link span { font-family: var(--font-display); font-size: 14px; font-weight: 500; color: var(--sand); }
   .bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; padding-top: 26px; }
   .tagline { font-size: 15px; color: var(--sand); opacity: .7; font-weight: 300; }

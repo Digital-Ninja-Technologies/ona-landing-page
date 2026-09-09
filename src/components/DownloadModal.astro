@@ -60,8 +60,11 @@ import QRCode from './QRCode.astro';
   h3 { font-family: var(--font-display); font-weight: 700; font-size: 28px; line-height: 1.1; letter-spacing: -.02em; color: var(--forest); margin: 16px 0 8px; }
   .modal-card > p { font-size: 15px; line-height: 1.55; color: #16171A; opacity: .72; margin: 0 0 22px; }
   .store-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
-  .store { flex: 1 1 170px; display: flex; align-items: center; gap: 10px; background: var(--forest); border-radius: 14px; padding: 12px 18px; }
-  .store:hover { background: #16171A; }
+  .store {
+    flex: 1 1 170px; display: flex; align-items: center; gap: 10px; background: var(--forest); border-radius: 14px; padding: 12px 18px;
+    transition: transform .2s cubic-bezier(.2,.8,.2,1), background .2s;
+  }
+  .store:hover { background: #16171A; transform: translateY(-2px); }
   .eyebrow { font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--sand); opacity: .65; }
   .name { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--paper); }
   .scan { border-top: 1px solid var(--border-sand); padding-top: 20px; }

@@ -6,26 +6,39 @@ const stats = [
 ];
 ---
 <section class="stats">
-  <div class="stats-grid container" data-reveal>
-    {stats.map((s) => (
-      <div class="pill">
-        <span class="dot" style={`background:${s.color}`}></span>
-        <span class="text">{s.text}</span>
-      </div>
-    ))}
+  <div class="stats-mask container" data-reveal>
+    <div data-marquee class="stats-track">
+      {stats.map((s) => (
+        <div class="pill">
+          <span class="dot" style={`background:${s.color}`}></span>
+          <span class="text">{s.text}</span>
+        </div>
+      ))}
+    </div>
   </div>
 </section>
 
 <style>
   .stats { background: var(--sand); padding: 34px 24px; }
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
-    align-items: stretch;
+  .stats-mask {
+    overflow: hidden;
+    /* Fade the edges so the loop point reads as a continuous ribbon,
+       not a hard clip. */
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
   }
-  @media (max-width: 760px) {
-    .stats-grid { grid-template-columns: 1fr; }
+  .stats-track {
+    display: flex;
+    align-items: stretch;
+    gap: 14px;
+    width: max-content;
+    /* Cloned once by interactions.ts, so 0 -> -50% is exactly one full
+       lap regardless of how wide the pills render at any breakpoint. */
+    animation: statsMarquee 26s linear infinite;
+  }
+  @keyframes statsMarquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
   .pill {
     display: flex;
@@ -35,14 +48,16 @@ const stats = [
     border: 1px solid var(--border-sand);
     border-radius: 999px;
     padding: 13px 22px;
-    min-width: 0;
+    white-space: nowrap;
+    flex: 0 0 auto;
   }
   .dot { width: 8px; height: 8px; flex: 0 0 auto; border-radius: 9px; }
   .text {
     font-family: var(--font-display);
-    font-size: clamp(12px, 1.05vw, 15px);
+    font-size: 15px;
     font-weight: 600;
     color: var(--forest);
     line-height: 1.25;
+    white-space: nowrap;
   }
 </style>

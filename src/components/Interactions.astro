@@ -25,16 +25,18 @@
     revealNodes.forEach((n) => n.classList.add('is-visible'));
   }
 
-  // ---- Hero carousel: clone the track so the loop has no seam ---------
-  const track = document.querySelector<HTMLElement>('[data-ona-track]');
-  if (track && !track.dataset.onaCloned) {
+  // ---- Marquees (hero carousel, stat strip): clone each track's content
+  // once so a CSS translateX(-50%) loop has no seam, whatever width the
+  // content ends up at.
+  document.querySelectorAll<HTMLElement>('[data-marquee]').forEach((track) => {
+    if (track.dataset.onaCloned) return;
     track.dataset.onaCloned = '1';
     Array.from(track.children).forEach((card) => {
       const clone = card.cloneNode(true) as HTMLElement;
       clone.setAttribute('aria-hidden', 'true');
       track.appendChild(clone);
     });
-  }
+  });
 
   // ---- Mockup skeletons: clear ~1.3s after each phone scrolls into view
   const skeletons = Array.from(document.querySelectorAll<HTMLElement>('[data-skel]'));

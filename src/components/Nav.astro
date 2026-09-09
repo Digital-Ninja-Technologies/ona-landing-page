@@ -60,6 +60,8 @@ import LogoMark from './LogoMark.astro';
     border: 0;
     border-radius: 999px;
     cursor: pointer;
+    transition: background .2s, transform .2s cubic-bezier(.2,.8,.2,1);
   }
-  .nav-download:hover { background: var(--gold); }
+  .nav-download:hover { background: var(--gold); transform: translateY(-2px); }
+  .nav-download:active { transform: translateY(0); }
 </style>

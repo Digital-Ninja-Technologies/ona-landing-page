@@ -1,3 +1,6 @@
+---
+import WaitlistForm from './WaitlistForm.astro';
+---
 <section id="waitlist" class="waitlist">
   <div class="container inner" data-reveal>
     <div class="copy">
@@ -6,25 +9,9 @@
       <p>We're putting the finishing touches on the app. Drop your email and we'll let you know the moment it's ready to download.</p>
     </div>
 
-    <form class="form" data-waitlist-form novalidate>
-      <div class="field">
-        <label for="waitlist-email" class="visually-hidden">Email address</label>
-        <input
-          id="waitlist-email"
-          name="email"
-          type="email"
-          inputmode="email"
-          autocomplete="email"
-          placeholder="you@example.com"
-          required
-          data-waitlist-input
-        />
-        <button type="submit" data-waitlist-submit>
-          <span data-label>Join waitlist</span>
-        </button>
-      </div>
-      <p class="status" data-waitlist-status role="status" aria-live="polite"></p>
-    </form>
+    <div class="form-col">
+      <WaitlistForm />
+    </div>
   </div>
 </section>
 
@@ -63,133 +50,5 @@
     max-width: 34em;
     margin: 0;
   }
-
-  .form { flex: 1 1 380px; min-width: 0; }
-  .field {
-    display: flex;
-    gap: 10px;
-    background: var(--paper);
-    border-radius: 999px;
-    padding: 6px 6px 6px 22px;
-  }
-  .field input {
-    flex: 1 1 auto;
-    min-width: 0;
-    border: 0;
-    background: transparent;
-    font-family: var(--font-body), sans-serif;
-    font-size: 15px;
-    color: #16171A;
-  }
-  .field input::placeholder { color: var(--muted); }
-  .field input:focus { outline: none; }
-  .field input:invalid[data-touched] { color: var(--danger); }
-
-  .field button {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: .02em;
-    color: var(--paper);
-    background: var(--green);
-    border: 0;
-    border-radius: 999px;
-    padding: 13px 22px;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background .2s, transform .2s cubic-bezier(.2,.8,.2,1);
-  }
-  .field button:hover { background: #164A3A; transform: translateY(-2px); }
-  .field button:active { transform: translateY(0); }
-  .field button:disabled { opacity: .6; cursor: default; transform: none; }
-
-  .status {
-    min-height: 20px;
-    margin: 10px 4px 0;
-    font-size: 13.5px;
-    color: var(--sand);
-    opacity: .85;
-  }
-  .status[data-state="error"] { color: #F3A796; opacity: 1; }
-  .status[data-state="success"] { color: var(--gold); opacity: 1; }
-
-  @media (max-width: 520px) {
-    .field { flex-wrap: wrap; border-radius: 22px; padding: 14px; }
-    .field input { flex: 1 1 100%; padding: 8px 6px; }
-    .field button { flex: 1 1 100%; padding: 13px; }
-  }
+  .form-col { flex: 1 1 380px; min-width: 0; }
 </style>
-
-<script>
-  // Public by design: the publishable/anon key only grants what the
-  // waitlist_signups RLS policy allows (INSERT-only — no read, update, or
-  // delete), so shipping it in client code is safe. See the "ona" Supabase
-  // project's waitlist_signups migration for the policy.
-  const SUPABASE_URL = 'https://knffcabxyazookxchruq.supabase.co';
-  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_xK8Ej26DgK-gWnCf2m3uwg_VNP9oud9';
-
-  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-  document.querySelectorAll<HTMLFormElement>('[data-waitlist-form]').forEach((form) => {
-    const input = form.querySelector<HTMLInputElement>('[data-waitlist-input]');
-    const submit = form.querySelector<HTMLButtonElement>('[data-waitlist-submit]');
-    const label = submit?.querySelector<HTMLElement>('[data-label]');
-    const status = form.querySelector<HTMLElement>('[data-waitlist-status]');
-    if (!input || !submit || !label || !status) return;
-
-    const setStatus = (text: string, state?: 'success' | 'error') => {
-      status.textContent = text;
-      if (state) status.setAttribute('data-state', state);
-      else status.removeAttribute('data-state');
-    };
-
-    input.addEventListener('blur', () => input.setAttribute('data-touched', ''));
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = input.value.trim();
-      if (!EMAIL_RE.test(email)) {
-        input.setAttribute('data-touched', '');
-        input.focus();
-        setStatus('Enter a valid email address.', 'error');
-        return;
-      }
-
-      submit.disabled = true;
-      label.textContent = 'Joining…';
-      setStatus('');
-
-      try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist_signups`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            apikey: SUPABASE_PUBLISHABLE_KEY,
-            Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
-            Prefer: 'return=minimal',
-          },
-          body: JSON.stringify({ email, source: 'landing_page' }),
-        });
-
-        if (res.status === 201) {
-          setStatus("You're on the list — we'll email you at launch.", 'success');
-          form.reset();
-          input.removeAttribute('data-touched');
-        } else if (res.status === 409) {
-          setStatus("You're already on the waitlist.", 'success');
-        } else {
-          setStatus("Something went wrong — please try again.", 'error');
-        }
-      } catch {
-        setStatus('Network error — please try again.', 'error');
-      } finally {
-        submit.disabled = false;
-        label.textContent = 'Join waitlist';
-      }
-    });
-  });
-</script>

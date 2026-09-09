@@ -1,0 +1,81 @@
+---
+import PhoneFrame from '../PhoneFrame.astro';
+import PhoneStatusBar from '../PhoneStatusBar.astro';
+import PhoneTabBar from '../PhoneTabBar.astro';
+
+const agents = [
+  {
+    initials: 'YB', bg: '#123A2C', fg: '#EDE1CB',
+    name: 'Atlas Trails Travel', rating: '4.9', exp: '11 yrs experience',
+    desc: 'Desert crossings and High Atlas villages, on the ground since 2015.',
+    tags: ['Sahara', 'Trekking', 'Riads'],
+  },
+  {
+    initials: 'AM', bg: '#1B5E4B', fg: '#EDE1CB',
+    name: 'Medina Food Walks', rating: '5.0', exp: '6 yrs experience',
+    desc: "Evening tasting routes through Marrakech's old town.",
+    tags: [],
+  },
+];
+---
+<PhoneFrame size="feature">
+  <PhoneStatusBar size="feature" />
+  <div class="title">Travel Agents</div>
+  <div class="search-row">
+    <div class="search">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6E6A5E" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="M16.6 16.6L21 21"></path></svg>
+      <span>Search agents by name or specialty</span>
+    </div>
+    <div class="filters">
+      <span class="chip active">All</span>
+      <span class="chip">4.5+ ★</span>
+      <span class="chip">4.0+ ★</span>
+    </div>
+  </div>
+  <div class="body">
+    {agents.map((a) => (
+      <div class="card">
+        <div class="avatar" style={`background:${a.bg}; color:${a.fg}`}>{a.initials}</div>
+        <div class="info">
+          <div class="name-row">
+            <div class="name">{a.name}</div>
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2F9E6E" stroke-width="2" stroke-linecap="round" class="verified"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 12.4l2.4 2.4 4.6-5"></path></svg>
+          </div>
+          <div class="rating-row">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="#D99B36"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"></path></svg>
+            <span>{a.rating}</span><span class="exp">{a.exp}</span>
+          </div>
+          <div class="desc">{a.desc}</div>
+          {a.tags.length > 0 && (
+            <div class="tags">
+              {a.tags.map((t) => <span class="tag">{t}</span>)}
+            </div>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+  <PhoneTabBar active="agents" />
+</PhoneFrame>
+
+<style>
+  .title { font-family: var(--font-display); font-size: 15px; font-weight: 600; color: #16171A; padding: 10px 16px 12px; }
+  .search-row { padding: 0 16px 12px; }
+  .search { display: flex; align-items: center; gap: 8px; background: var(--sand); border-radius: 14px; padding: 11px 13px; }
+  .search span { font-size: 11px; color: var(--muted); }
+  .filters { display: flex; gap: 8px; margin-top: 10px; }
+  .chip { font-size: 10.5px; font-weight: 500; border-radius: 20px; padding: 5px 13px; color: #16171A; background: var(--sand); border: 1px solid var(--border-sand); }
+  .chip.active { color: var(--paper); background: var(--green); border: none; }
+  .body { flex: 1; overflow: hidden; padding: 0 16px; display: flex; flex-direction: column; gap: 13px; }
+  .card { background: var(--sand); border: 1px solid var(--border-sand); border-radius: 16px; padding: 12px; display: flex; gap: 12px; }
+  .avatar { width: 54px; height: 54px; flex: 0 0 auto; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 15px; font-weight: 600; }
+  .info { min-width: 0; }
+  .name-row { display: flex; align-items: center; gap: 5px; }
+  .name { font-family: var(--font-display); font-size: 12.5px; font-weight: 600; color: #16171A; }
+  .verified { animation: onaBadge 3.2s ease-in-out infinite; }
+  .rating-row { display: flex; align-items: center; gap: 5px; margin-top: 4px; font-size: 10.5px; color: #16171A; }
+  .exp { color: var(--muted); margin-left: 5px; }
+  .desc { font-size: 10.5px; color: var(--muted); line-height: 1.4; margin-top: 5px; }
+  .tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 7px; }
+  .tag { font-size: 9.5px; background: var(--paper); border-radius: 20px; padding: 3px 9px; color: #16171A; }
+</style>

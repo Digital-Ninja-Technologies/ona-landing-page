@@ -1,0 +1,61 @@
+---
+interface Props {
+  number: string;
+  label: string;
+  heading: string;
+  body: string;
+  reverse?: boolean;
+  last?: boolean;
+}
+const { number, label, heading, body, reverse = false, last = false } = Astro.props;
+---
+<div class:list={['row', { reverse, last }]} data-reveal>
+  <div class="copy">
+    <div class="kicker">
+      <span class="num">{number}</span>
+      <span class="label">{label}</span>
+    </div>
+    <h3>{heading}</h3>
+    <p>{body}</p>
+  </div>
+  <div class="phone-col">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: clamp(32px, 5vw, 80px);
+    padding: 0 0 clamp(64px, 7vw, 104px);
+  }
+  .row.last { padding-bottom: 20px; }
+  .row.reverse { flex-direction: row-reverse; }
+  .copy { flex: 1 1 320px; min-width: 0; }
+  .phone-col { flex: 1 1 260px; display: flex; justify-content: center; min-width: 0; }
+  .kicker { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 20px; }
+  .num { font-family: var(--font-display); font-size: 12px; font-weight: 600; letter-spacing: .14em; color: var(--gold); }
+  .label { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--green); }
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(26px, 3.2vw, 38px);
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    color: var(--forest);
+    margin: 0 0 18px;
+    text-wrap: balance;
+  }
+  p {
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--ink);
+    opacity: .75;
+    font-weight: 300;
+    max-width: 34em;
+    margin: 0;
+    text-wrap: pretty;
+  }
+</style>

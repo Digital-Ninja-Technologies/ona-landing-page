@@ -1,0 +1,39 @@
+---
+interface Props {
+  width?: number;
+  height?: number;
+  ring?: string;
+  text?: string;
+  route?: string;
+  dot?: string;
+  class?: string;
+  /** Render just the O-route mark, without the "NA" wordmark. */
+  markOnly?: boolean;
+}
+
+const {
+  width = 122,
+  height = 50,
+  ring = '#EDE1CB',
+  text = '#EDE1CB',
+  route = '#D99B36',
+  dot = '#D99B36',
+  class: className,
+  markOnly = false,
+} = Astro.props;
+
+const uid = Math.random().toString(36).slice(2, 9);
+const viewBox = markOnly ? '0 0 120 130' : '0 0 316 130';
+---
+<svg width={width} height={height} viewBox={viewBox} fill="none" aria-label="Ọ̀nà" class={className}>
+  <mask id={`ona-cut-${uid}`} maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="130">
+    <rect width="120" height="130" fill="#fff"></rect>
+    <path d="M60 22C40 40 80 72 60 90" stroke="#000" stroke-width="20" stroke-linecap="round"></path>
+  </mask>
+  <circle cx="60" cy="56" r="34" stroke={ring} stroke-width="14" fill="none" mask={`url(#ona-cut-${uid})`}></circle>
+  <path d="M60 22C40 40 80 72 60 90" stroke={route} stroke-width="10" stroke-linecap="round" fill="none"></path>
+  <circle cx="60" cy="107" r="6" fill={dot}></circle>
+  {!markOnly && (
+    <text x="112" y="82" font-family="Space Grotesk, sans-serif" font-size="76" font-weight="600" fill={text} letter-spacing="1">NA</text>
+  )}
+</svg>

@@ -1,0 +1,22 @@
+---
+interface Props {
+  size?: 'hero' | 'feature';
+}
+const { size = 'feature' } = Astro.props;
+---
+<div class:list={['status', size]}>
+  <span>9:41</span><span class="signal">◍ ▮▮▮</span>
+</div>
+
+<style>
+  .status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    color: #16171A;
+  }
+  .status.hero { padding: 13px 22px 4px; font-size: 11px; }
+  .status.feature { padding: 13px 20px 2px; font-size: 10.5px; }
+  .signal { opacity: .75; letter-spacing: .08em; }
+</style>

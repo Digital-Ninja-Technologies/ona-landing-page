@@ -1,0 +1,76 @@
+---
+import PhoneFrame from '../PhoneFrame.astro';
+import PhoneStatusBar from '../PhoneStatusBar.astro';
+import PhoneTabBar from '../PhoneTabBar.astro';
+---
+<PhoneFrame size="feature">
+  <PhoneStatusBar size="feature" />
+  <div class="title">Community</div>
+  <div class="filters">
+    <span class="chip active">All</span>
+    <span class="chip">Stories</span>
+    <span class="chip">Tips</span>
+  </div>
+  <div class="body">
+    <div class="card">
+      <div class="card-head">
+        <div class="avatar gold">T</div>
+        <div class="who">
+          <div class="handle">@tola.abroad</div>
+          <div class="date">Sep 4, 2026</div>
+        </div>
+        <span class="badge">Story</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#6E6A5E" class="more"><circle cx="12" cy="5" r="1.6"></circle><circle cx="12" cy="12" r="1.6"></circle><circle cx="12" cy="19" r="1.6"></circle></svg>
+      </div>
+      <div class="post-text">Took the local dhow out of Stone Town instead of the tour boat. Half the price, twice the view.</div>
+      <div class="post-photo">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#EDE1CB" stroke-width="1.4" opacity=".5"><path d="M3 17l5-6 4 4 3-3 6 5"></path><circle cx="8" cy="7" r="2"></circle></svg>
+      </div>
+      <div class="actions">
+        <div class="action"><svg width="16" height="16" viewBox="0 0 24 24" fill="#1B5E4B" class="beat"><path d="M12 20.3l-1.4-1.3C6 14.9 3 12.2 3 8.9A4.9 4.9 0 017.9 4c1.6 0 3.1.7 4.1 2A5.4 5.4 0 0116.1 4A4.9 4.9 0 0121 8.9c0 3.3-3 6-7.6 10.1z"></path></svg><span>42</span></div>
+        <div class="action"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6E6A5E" stroke-width="1.7" stroke-linecap="round"><path d="M21 12a8 8 0 01-11.6 7.1L3 21l1.9-6.4A8 8 0 1121 12z"></path></svg><span>7</span></div>
+        <div class="action"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6E6A5E" stroke-width="1.7" stroke-linecap="round"><path d="M17 2l4 4-4 4"></path><path d="M21 6H8a4 4 0 00-4 4v1"></path><path d="M7 22l-4-4 4-4"></path><path d="M3 18h13a4 4 0 004-4v-1"></path></svg><span>3</span></div>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#6E6A5E" stroke-width="1.7" stroke-linecap="round"><path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7M12 16V3M8 7l4-4 4 4"></path></svg>
+      </div>
+    </div>
+    <div class="card tip">
+      <div class="card-head">
+        <div class="avatar dark">K</div>
+        <div class="who"><div class="handle small">@kemi.j</div><div class="date">Sep 2, 2026</div></div>
+        <span class="badge">Tip</span>
+      </div>
+      <div class="post-text tip-text">Ferry times shift in the rainy season — check the night before, not the morning of.</div>
+    </div>
+  </div>
+  <div class="fab">
+    <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#16171A" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3l1.7 4.6L18.3 9.3l-4.6 1.7L12 15.6l-1.7-4.6L5.7 9.3l4.6-1.7z"></path><path d="M18 16l.8 2.2L21 19l-2.2.8L18 22l-.8-2.2L15 19l2.2-.8z"></path></svg>
+  </div>
+  <PhoneTabBar active="community" />
+</PhoneFrame>
+
+<style>
+  .title { font-family: var(--font-display); font-size: 15px; font-weight: 600; color: #16171A; padding: 10px 16px 10px; }
+  .filters { display: flex; gap: 7px; padding: 0 16px 12px; }
+  .chip { font-size: 10.5px; color: #16171A; background: var(--sand); border: 1px solid var(--border-sand); border-radius: 20px; padding: 5px 12px; }
+  .chip.active { color: var(--paper); background: var(--green); border: none; }
+  .body { flex: 1; overflow: hidden; padding: 0 16px; }
+  .card { background: var(--sand); border: 1px solid var(--border-sand); border-radius: 16px; padding: 13px; }
+  .card.tip { margin-top: 12px; }
+  .card-head { display: flex; align-items: center; gap: 10px; }
+  .avatar { width: 34px; height: 34px; border-radius: 99px; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 13px; font-weight: 600; }
+  .avatar.gold { background: var(--gold); color: var(--forest); }
+  .avatar.dark { width: 30px; height: 30px; background: var(--forest); color: var(--sand); font-size: 12px; }
+  .who { flex: 1; min-width: 0; }
+  .handle { font-family: var(--font-display); font-size: 12.5px; font-weight: 600; color: #16171A; }
+  .handle.small { font-size: 12px; }
+  .date { font-size: 10px; color: var(--muted); }
+  .badge { font-size: 9.5px; font-weight: 600; color: #fff; background: var(--green); border-radius: 12px; padding: 3px 9px; }
+  .more { margin-left: 0; }
+  .post-text { font-size: 11.5px; line-height: 1.5; color: #16171A; margin-top: 11px; }
+  .post-text.tip-text { margin-top: 10px; }
+  .post-photo { height: 104px; border-radius: 12px; background: var(--green); margin-top: 11px; display: flex; align-items: center; justify-content: center; }
+  .actions { display: flex; align-items: center; gap: 16px; margin-top: 12px; }
+  .action { display: flex; align-items: center; gap: 5px; font-size: 10.5px; color: var(--muted); }
+  .beat { animation: onaBadge 2.8s ease-in-out infinite; }
+  .fab { position: absolute; right: 16px; bottom: 82px; width: 48px; height: 48px; border-radius: 16px; background: var(--gold); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 18px -6px rgba(22,23,26,.5); }
+</style>

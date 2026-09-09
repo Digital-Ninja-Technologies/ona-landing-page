@@ -1,0 +1,68 @@
+---
+import PhoneFrame from '../PhoneFrame.astro';
+import PhoneStatusBar from '../PhoneStatusBar.astro';
+import PhoneTabBar from '../PhoneTabBar.astro';
+---
+<PhoneFrame size="feature">
+  <PhoneStatusBar size="feature" />
+  <div class="head">
+    <div class="title">My Itineraries</div>
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#16171A" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg>
+  </div>
+  <div class="body">
+    <div class="card">
+      <div class="card-top">
+        <div class="card-title">4 Days in Lisbon &amp; Sintra</div>
+        <div class="ai-chip">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="#D99B36"><path d="M12 3l1.7 4.6L18.3 9.3l-4.6 1.7L12 15.6l-1.7-4.6L5.7 9.3l4.6-1.7z"></path></svg>
+          <span>AI</span>
+        </div>
+      </div>
+      <div class="meta">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6E6A5E" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+        <span>4 days</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6E6A5E" stroke-width="1.8" class="loc"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"></path><circle cx="12" cy="10" r="2.6"></circle></svg>
+        <span>Lisbon, Portugal</span>
+      </div>
+      <div class="card-actions">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#6E6A5E" stroke-width="1.8" stroke-linecap="round"><path d="M4 12v7a2 2 0 002 2h12a2 2 0 002-2v-7M12 16V3M8 7l4-4 4 4"></path></svg>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#C1442D" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14"></path></svg>
+      </div>
+    </div>
+    <div class="card plain">
+      <div class="card-title">Sahara loop with Youssef</div>
+      <div class="meta">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6E6A5E" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M3 10h18M8 3v4M16 3v4"></path></svg>
+        <span>7 days</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#6E6A5E" stroke-width="1.8" class="loc"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1116 0z"></path><circle cx="12" cy="10" r="2.6"></circle></svg>
+        <span>Marrakech</span>
+      </div>
+    </div>
+    <div class="generating">
+      <div class="gen-label">Generating with AI</div>
+      <div class="gen-day">Day 3 · Sintra day trip, Pena Palace first</div>
+      <div class="gen-track"><div class="gen-fill"></div></div>
+    </div>
+  </div>
+  <PhoneTabBar active="itineraries" />
+</PhoneFrame>
+
+<style>
+  .head { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px 12px; }
+  .title { font-family: var(--font-display); font-size: 15px; font-weight: 600; color: #16171A; }
+  .body { flex: 1; overflow: hidden; padding: 0 16px; display: flex; flex-direction: column; gap: 12px; }
+  .card { background: var(--sand); border: 1px solid var(--border-sand); border-radius: 16px; padding: 13px; }
+  .card.plain { padding: 13px; }
+  .card-top { display: flex; align-items: flex-start; gap: 8px; }
+  .card-title { flex: 1; font-family: var(--font-display); font-size: 13px; font-weight: 600; color: #16171A; line-height: 1.25; }
+  .ai-chip { display: flex; align-items: center; gap: 3px; background: rgba(217,155,54,.15); border-radius: 10px; padding: 3px 7px; }
+  .ai-chip span { font-size: 9.5px; font-weight: 600; color: var(--gold); }
+  .meta { display: flex; align-items: center; gap: 5px; margin-top: 8px; font-size: 10.5px; color: var(--muted); }
+  .meta .loc { margin-left: 6px; }
+  .card-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 8px; }
+  .generating { background: var(--forest); border-radius: 16px; padding: 13px; }
+  .gen-label { font-size: 9px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; animation: onaTabGlow 1.8s ease-in-out infinite; }
+  .gen-day { font-family: var(--font-display); font-size: 12.5px; font-weight: 600; color: var(--paper); line-height: 1.3; }
+  .gen-track { height: 3px; border-radius: 9px; background: rgba(237,225,203,.2); margin-top: 10px; overflow: hidden; }
+  .gen-fill { width: 58%; height: 100%; background: var(--gold); animation: onaFill 3.6s ease-in-out infinite; }
+</style>

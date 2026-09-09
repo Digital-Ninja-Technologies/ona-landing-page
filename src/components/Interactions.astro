@@ -1,0 +1,77 @@
+---
+// Client-side behavior: scroll-reveal, the hero carousel's seamless loop,
+// mockup skeleton clearing, and the download dialog. Bundled + deferred by
+// Astro since this is a plain <script> in a component.
+---
+<script>
+  // ---- Scroll reveal --------------------------------------------------
+  const revealNodes = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+  if (revealNodes.length && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        }
+      },
+      { rootMargin: '0px 0px -8% 0px', threshold: 0.01 }
+    );
+    revealNodes.forEach((n) => io.observe(n));
+    // Fail-safe: never leave content invisible if the observer stalls.
+    window.setTimeout(() => revealNodes.forEach((n) => n.classList.add('is-visible')), 2500);
+  } else {
+    revealNodes.forEach((n) => n.classList.add('is-visible'));
+  }
+
+  // ---- Hero carousel: clone the track so the loop has no seam ---------
+  const track = document.querySelector<HTMLElement>('[data-ona-track]');
+  if (track && !track.dataset.onaCloned) {
+    track.dataset.onaCloned = '1';
+    Array.from(track.children).forEach((card) => {
+      const clone = card.cloneNode(true) as HTMLElement;
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
+    });
+  }
+
+  // ---- Mockup skeletons: clear ~1.3s after each phone scrolls into view
+  const skeletons = Array.from(document.querySelectorAll<HTMLElement>('[data-skel]'));
+  const hideSkeleton = (el: HTMLElement) => { el.style.display = 'none'; };
+  if (skeletons.length) {
+    if ('IntersectionObserver' in window) {
+      const sio = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            const el = entry.target as HTMLElement & { _onaArmed?: boolean };
+            if (!entry.isIntersecting || el._onaArmed) continue;
+            el._onaArmed = true;
+            sio.unobserve(el);
+            window.setTimeout(() => hideSkeleton(el), 1300);
+          }
+        },
+        { threshold: 0.05 }
+      );
+      skeletons.forEach((el) => sio.observe(el));
+      window.setTimeout(() => skeletons.forEach(hideSkeleton), 3200);
+    } else {
+      skeletons.forEach(hideSkeleton);
+    }
+  }
+
+  // ---- Download dialog --------------------------------------------------
+  const dialog = document.querySelector<HTMLDialogElement>('#download-modal');
+  if (dialog) {
+    document.querySelectorAll<HTMLElement>('[data-open-download]').forEach((btn) => {
+      btn.addEventListener('click', () => dialog.showModal());
+    });
+    dialog.querySelectorAll<HTMLElement>('[data-close-download]').forEach((btn) => {
+      btn.addEventListener('click', () => dialog.close());
+    });
+    // Click on the ::backdrop (outside the card) closes it.
+    dialog.addEventListener('click', (e) => {
+      if (e.target === dialog) dialog.close();
+    });
+  }
+</script>

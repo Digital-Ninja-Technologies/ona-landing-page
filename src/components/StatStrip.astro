@@ -1,0 +1,48 @@
+---
+const stats = [
+  { color: 'var(--gold)', text: 'Plan a full trip in under 2 minutes' },
+  { color: 'var(--green)', text: 'AI-generated itineraries, real local agents, one app' },
+  { color: 'var(--gold)', text: "Sign in with Apple or Google — you're exploring in seconds" },
+];
+---
+<section class="stats">
+  <div class="stats-grid container" data-reveal>
+    {stats.map((s) => (
+      <div class="pill">
+        <span class="dot" style={`background:${s.color}`}></span>
+        <span class="text">{s.text}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .stats { background: var(--sand); padding: 34px 24px; }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    align-items: stretch;
+  }
+  @media (max-width: 760px) {
+    .stats-grid { grid-template-columns: 1fr; }
+  }
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--paper);
+    border: 1px solid var(--border-sand);
+    border-radius: 999px;
+    padding: 13px 22px;
+    min-width: 0;
+  }
+  .dot { width: 8px; height: 8px; flex: 0 0 auto; border-radius: 9px; }
+  .text {
+    font-family: var(--font-display);
+    font-size: clamp(12px, 1.05vw, 15px);
+    font-weight: 600;
+    color: var(--forest);
+    line-height: 1.25;
+  }
+</style>

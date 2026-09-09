@@ -1,0 +1,55 @@
+---
+import FeatureRow from './FeatureRow.astro';
+import PhoneItineraries from './phones/PhoneItineraries.astro';
+import PhoneAIChat from './phones/PhoneAIChat.astro';
+import PhoneAgents from './phones/PhoneAgents.astro';
+import PhoneExplore from './phones/PhoneExplore.astro';
+import PhoneCommunity from './phones/PhoneCommunity.astro';
+import PhoneEssentials from './phones/PhoneEssentials.astro';
+---
+<section id="features" class="features">
+  <div class="container">
+    <div class="heading" data-reveal>
+      <div class="eyebrow">What's inside</div>
+      <h2>Six ways Ona keeps you moving.</h2>
+    </div>
+
+    <FeatureRow number="01" label="AI itinerary planning" heading="Tell it where. It'll figure out how." body="Type a destination and a budget — Ona's AI builds you a full day-by-day itinerary in seconds, real places included. Don't like a day? Regenerate it, tweak it, make it yours.">
+      <PhoneItineraries />
+    </FeatureRow>
+
+    <FeatureRow number="02" label="AI travel assistant" heading="Your smartest travel buddy, on call 24/7." body="Stuck between two cities? Need a rainy-day backup plan? Ask Ona's built-in AI assistant anything — it knows the destination, your itinerary, and how to actually help." reverse>
+      <PhoneAIChat />
+    </FeatureRow>
+
+    <FeatureRow number="03" label="Travel agents marketplace" heading="Real experts. Real itineraries. Real fast." body="Browse and book verified local travel agents who know the ground truth — not just what a search engine says. Registered pros, ready to plan your next move.">
+      <PhoneAgents />
+    </FeatureRow>
+
+    <FeatureRow number="04" label="Discover & explore" heading={'Never wonder "what\'s near me?" again.'} body="Ona finds destinations and experiences worth your time based on where you actually are — geo-aware recommendations, no digging required." reverse>
+      <PhoneExplore />
+    </FeatureRow>
+
+    <FeatureRow number="05" label="Community & messaging" heading="Travel is better shared." body="Post your trips, follow fellow explorers, and message the people you meet along the way. Share photos, swap tips, build your own travel circle.">
+      <PhoneCommunity />
+    </FeatureRow>
+
+    <FeatureRow number="06" label="Travel essentials" heading="The boring stuff, handled." body="Currency converter, quick reviews, trip tools — all the little things that make a trip run smooth, built right in." reverse last>
+      <PhoneEssentials />
+    </FeatureRow>
+  </div>
+</section>
+
+<style>
+  .features { padding: 96px 24px 40px; background: var(--paper); }
+  .heading { max-width: 620px; margin-bottom: 72px; }
+  .eyebrow { font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--green); margin-bottom: 18px; }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.05;
+    letter-spacing: -.025em;
+    color: var(--forest);
+  }
+</style>

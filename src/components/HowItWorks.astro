@@ -1,0 +1,45 @@
+---
+const steps = [
+  { n: '1', title: 'Sign up', body: "Google, Apple, or email. Pick your username, you're in." },
+  { n: '2', title: 'Discover & plan', body: 'Let AI build your itinerary or book a local agent to do it for you.' },
+  { n: '3', title: 'Go', body: 'Message your circle, post your journey, and keep exploring.' },
+];
+---
+<section id="how" class="how">
+  <div class="container">
+    <div class="head" data-reveal>
+      <h2>Three steps to the road.</h2>
+      <div class="eyebrow">How it works</div>
+    </div>
+    <div class="steps" data-reveal>
+      {steps.map((s) => (
+        <div class="step">
+          <div class="step-head">
+            <span class="num">{s.n}</span>
+            <span class="title">{s.title}</span>
+          </div>
+          <p>{s.body}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .how { background: var(--forest); padding: clamp(72px, 8vw, 110px) 24px; }
+  .head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 56px; }
+  h2 {
+    font-family: var(--font-display); font-weight: 700; font-size: clamp(30px, 4vw, 48px);
+    line-height: 1.05; letter-spacing: -.025em; color: var(--paper);
+  }
+  .eyebrow { font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: clamp(20px, 3vw, 32px); }
+  .step { border-top: 2px solid rgba(237, 225, 203, .25); padding-top: 24px; }
+  .step-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+  .num {
+    width: 34px; height: 34px; border-radius: 99px; background: var(--gold); color: var(--forest);
+    font-family: var(--font-display); font-weight: 700; font-size: 15px; display: flex; align-items: center; justify-content: center;
+  }
+  .title { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--paper); }
+  .step p { font-size: 16px; line-height: 1.6; color: var(--sand); opacity: .75; font-weight: 300; }
+</style>

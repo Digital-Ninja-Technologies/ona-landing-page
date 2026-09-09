@@ -1,0 +1,141 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  path?: string;
+}
+
+const {
+  title = 'Ọ̀nà — Find Your Way | AI Trip Planning & Local Travel Agents',
+  description = 'Ọ̀nà is the all-in-one travel app: AI-built itineraries in seconds, verified local travel agents, geo-aware discovery, and a travel community. Free to download.',
+  path = '/',
+} = Astro.props;
+
+const canonicalURL = new URL(path, Astro.site);
+const ogImageURL = new URL('/og-image.png', Astro.site);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${Astro.site}#organization`,
+      name: 'Ọ̀nà',
+      alternateName: 'Ona',
+      url: Astro.site,
+      logo: new URL('/favicon.png', Astro.site).toString(),
+      slogan: 'Find your way.',
+    },
+    {
+      '@type': 'MobileApplication',
+      name: 'Ọ̀nà — Find Your Way',
+      applicationCategory: 'TravelApplication',
+      operatingSystem: 'iOS, Android',
+      description,
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Is Ọ̀nà free?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Downloading and planning is free. You only pay when you book a stay, an activity or an agent-built trip.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'How does the AI build an itinerary?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'You give it a destination, dates and a budget. It drafts a day-by-day plan from local guides and live availability, and you can edit any day before saving.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Can I work with a real person instead?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Yes. Browse verified local agents, see their past trips and rates, then hand over the whole plan or just one leg of it.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Which countries are covered?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Ọ̀nà launches across Nigeria, Ghana and Kenya, with agent coverage expanding city by city. Anywhere else, AI planning still works.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'How do I sign in?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Apple, Google or email. Pick a username and you are exploring in seconds.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'What happens if a trip changes?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Rebooking runs through the same chat thread as your original plan, so your agent or support can move things without starting over.',
+          },
+        },
+      ],
+    },
+  ],
+};
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL} />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
+  <meta name="theme-color" content="#123A2C" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalURL} />
+  <meta property="og:image" content={ogImageURL} />
+  <meta property="og:site_name" content="Ọ̀nà" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImageURL} />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+
+  <script is:inline>
+    document.documentElement.classList.add('js');
+  </script>
+</head>
+<body>
+  <slot />
+</body>
+</html>

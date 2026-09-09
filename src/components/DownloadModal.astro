@@ -1,0 +1,75 @@
+---
+import LogoMark from './LogoMark.astro';
+import QRCode from './QRCode.astro';
+---
+<dialog id="download-modal" class="modal" aria-labelledby="download-modal-title">
+  <div class="modal-card">
+    <button type="button" class="close" data-close-download aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#16171A" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </button>
+    <LogoMark width={46} height={50} ring="#123A2C" markOnly />
+    <h3 id="download-modal-title">Get Ọ̀nà — free</h3>
+    <p>Pick your store, or scan the code to install on your phone.</p>
+    <div class="store-buttons">
+      <a href="#get" class="store">
+        <svg width="19" height="22" viewBox="0 0 24 28" fill="#EDE1CB"><path d="M17.2 14.8c0-3 2.4-4.4 2.5-4.5-1.4-2-3.5-2.3-4.2-2.3-1.8-.2-3.4 1-4.3 1-.9 0-2.3-1-3.7-1-1.9 0-3.7 1.1-4.6 2.9-2 3.4-.5 8.5 1.4 11.3.9 1.4 2 2.9 3.5 2.8 1.4-.1 1.9-.9 3.6-.9 1.7 0 2.1.9 3.6.9 1.5 0 2.5-1.4 3.4-2.7.6-1 1.1-2 1.4-2.9-2.6-1-3-3.5-3-4.6zM14.7 5.6c.8-1 1.3-2.3 1.2-3.6-1.2 0-2.6.8-3.4 1.7-.7.8-1.3 2.2-1.2 3.4 1.3.1 2.6-.6 3.4-1.5z"></path></svg>
+        <div><div class="eyebrow">Download on the</div><div class="name">App Store</div></div>
+      </a>
+      <a href="#get" class="store">
+        <svg width="19" height="21" viewBox="0 0 22 24" fill="none"><path d="M2.6 1.6 14 12 2.6 22.4c-.4-.3-.6-.8-.6-1.4V3c0-.6.2-1.1.6-1.4z" fill="#EDE1CB"></path><path d="M14 12l3.6-3.3 2.9 1.7c1 .6 1 2.6 0 3.2l-2.9 1.7L14 12z" fill="#D99B36"></path><path d="M2.6 1.6 14 12l3.6-3.3L4.6.9c-.7-.4-1.5-.2-2 .7zM2.6 22.4 14 12l3.6 3.3L4.6 23.1c-.7.4-1.5.2-2-.7z" fill="#EDE1CB" opacity=".72"></path></svg>
+        <div><div class="eyebrow">Get it on</div><div class="name">Google Play</div></div>
+      </a>
+    </div>
+    <div class="scan">
+      <div class="scan-title">Scan to install</div>
+      <div class="scan-sub">Point your camera at the code for your phone.</div>
+      <div class="scan-grid">
+        <div class="scan-col">
+          <QRCode variant="ios" size={88} bg="#fff" border />
+          <div>
+            <div class="platform">iPhone</div>
+            <div class="store-name">App Store</div>
+          </div>
+        </div>
+        <div class="scan-col">
+          <QRCode variant="android" size={88} bg="#fff" border />
+          <div>
+            <div class="platform">Android</div>
+            <div class="store-name">Google Play</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  .modal { border: 0; padding: 0; background: transparent; max-width: none; max-height: none; }
+  .modal::backdrop { background: rgba(22, 23, 26, .68); }
+  .modal[open] { display: flex; align-items: center; justify-content: center; inset: 0; margin: 0; width: 100%; height: 100%; padding: 24px; overflow-y: auto; }
+  .modal-card {
+    background: var(--paper); border-radius: 26px; width: 100%; max-width: 460px;
+    max-height: calc(100vh - 48px); overflow-y: auto; margin: auto; padding: 30px; position: relative;
+    box-shadow: 0 40px 90px -30px rgba(0, 0, 0, .6);
+  }
+  .close {
+    position: absolute; top: 18px; right: 18px; width: 32px; height: 32px; border-radius: 99px;
+    background: var(--sand); border: 0; display: flex; align-items: center; justify-content: center; cursor: pointer;
+  }
+  .close:hover { background: var(--border-sand); }
+  h3 { font-family: var(--font-display); font-weight: 700; font-size: 28px; line-height: 1.1; letter-spacing: -.02em; color: var(--forest); margin: 16px 0 8px; }
+  .modal-card > p { font-size: 15px; line-height: 1.55; color: #16171A; opacity: .72; margin: 0 0 22px; }
+  .store-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+  .store { flex: 1 1 170px; display: flex; align-items: center; gap: 10px; background: var(--forest); border-radius: 14px; padding: 12px 18px; }
+  .store:hover { background: #16171A; }
+  .eyebrow { font-size: 9.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--sand); opacity: .65; }
+  .name { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--paper); }
+  .scan { border-top: 1px solid var(--border-sand); padding-top: 20px; }
+  .scan-title { font-family: var(--font-display); font-size: 15px; font-weight: 600; color: var(--forest); margin-bottom: 4px; }
+  .scan-sub { font-size: 13px; line-height: 1.5; color: #16171A; opacity: .65; margin-bottom: 16px; }
+  .scan-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; }
+  .scan-col { display: flex; align-items: center; gap: 12px; }
+  .scan-col :global(.qr) { width: 88px; flex: 0 0 auto; padding: 9px; border-radius: 14px; }
+  .platform { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #16171A; opacity: .55; margin-bottom: 3px; }
+  .store-name { font-family: var(--font-display); font-size: 14px; font-weight: 600; color: var(--forest); }
+</style>

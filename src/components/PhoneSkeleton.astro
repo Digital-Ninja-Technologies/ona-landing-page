@@ -1,0 +1,53 @@
+---
+// Shimmering loading placeholder shown inside every phone mockup until
+// interactions.ts clears it (on-scroll-into-view, with a hard fallback).
+---
+<div data-skel class="skel">
+  <div class="row">
+    <div class="skel-bar" style="width:30px;height:9px"></div>
+    <div class="skel-bar" style="width:40px;height:9px"></div>
+  </div>
+  <div class="block">
+    <div class="skel-bar" style="width:58%;height:14px"></div>
+    <div class="skel-bar" style="width:40%;height:9px;margin-top:8px"></div>
+  </div>
+  <div class="row chips">
+    <div class="skel-bar" style="width:54px;height:20px"></div>
+    <div class="skel-bar" style="width:62px;height:20px"></div>
+    <div class="skel-bar" style="width:48px;height:20px"></div>
+  </div>
+  <div class="cards">
+    <div class="skel-bar" style="height:76px;border-radius:16px"></div>
+    <div class="skel-bar" style="height:76px;border-radius:16px"></div>
+    <div class="skel-bar" style="height:60px;border-radius:16px"></div>
+  </div>
+  <div class="tabs">
+    <div class="skel-bar" style="flex:1;height:24px"></div>
+    <div class="skel-bar" style="flex:1;height:24px"></div>
+    <div class="skel-bar" style="flex:1;height:24px"></div>
+    <div class="skel-bar" style="flex:1;height:24px"></div>
+  </div>
+</div>
+
+<style>
+  .skel {
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    padding: 14px 16px 0;
+  }
+  .row { display: flex; justify-content: space-between; align-items: center; gap: 7px; }
+  .row.chips { margin-top: 16px; }
+  .block { margin-top: 18px; }
+  .cards { display: flex; flex-direction: column; gap: 11px; margin-top: 16px; }
+  .tabs {
+    margin-top: auto;
+    display: flex;
+    gap: 10px;
+    padding: 12px 0 16px;
+    border-top: 1px solid var(--border-sand);
+  }
+</style>

@@ -1,0 +1,50 @@
+---
+import PhoneFrame from '../PhoneFrame.astro';
+import PhoneStatusBar from '../PhoneStatusBar.astro';
+---
+<PhoneFrame size="feature">
+  <PhoneStatusBar size="feature" />
+  <div class="head">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#16171A" stroke-width="2" stroke-linecap="round"><path d="M15 5l-7 7 7 7"></path></svg>
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1B5E4B" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3l1.7 4.6L18.3 9.3l-4.6 1.7L12 15.6l-1.7-4.6L5.7 9.3l4.6-1.7z"></path></svg>
+    <div class="title">Ọ̀nà AI</div>
+  </div>
+  <div class="thread">
+    <div class="bubble bot">Hi! I'm your Ọ̀nà travel assistant. Where would you like to explore?</div>
+    <div class="bubble user">Porto or Coimbra for two days?</div>
+    <div class="bubble bot">
+      <div class="bubble-heading">Porto, on your dates</div>
+      <div class="bullet"><span>•</span><span>1h train from Lisbon, not 2h</span></div>
+      <div class="bullet"><span>•</span><span><strong>Douro valley</strong> fits your free Sunday</span></div>
+    </div>
+    <div class="bubble user">It's forecast to rain Saturday.</div>
+    <div class="bubble bot typing">
+      <span class="dot"></span><span class="dot d2"></span><span class="dot d3"></span>
+    </div>
+  </div>
+  <div class="input-row">
+    <div class="input">Ask about destinations, plans, tips...<span class="caret"></span></div>
+    <div class="send">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F5F0E6" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"></path></svg>
+    </div>
+  </div>
+</PhoneFrame>
+
+<style>
+  .head { display: flex; align-items: center; gap: 10px; padding: 10px 16px 12px; }
+  .title { font-family: var(--font-display); font-size: 15px; font-weight: 600; color: #16171A; }
+  .thread { flex: 1; overflow: hidden; padding: 4px 14px; display: flex; flex-direction: column; gap: 11px; }
+  .bubble { max-width: 80%; border-radius: 16px; padding: 10px 13px; font-size: 11.5px; line-height: 1.45; }
+  .bubble.bot { align-self: flex-start; background: var(--sand); color: #16171A; }
+  .bubble.user { align-self: flex-end; background: var(--green); color: #fff; }
+  .bubble-heading { font-family: var(--font-display); font-size: 12px; font-weight: 600; margin-bottom: 5px; }
+  .bullet { display: flex; gap: 6px; }
+  .bubble.typing { display: flex; gap: 5px; padding: 13px 16px; }
+  .dot { width: 6px; height: 6px; border-radius: 9px; background: var(--muted); animation: onaDot 1.2s ease-in-out infinite; }
+  .d2 { animation-delay: .16s; }
+  .d3 { animation-delay: .32s; }
+  .input-row { border-top: 1px solid var(--border-sand); padding: 10px 12px 18px; display: flex; align-items: center; gap: 8px; }
+  .input { flex: 1; display: flex; align-items: center; gap: 3px; background: var(--sand); border-radius: 14px; padding: 11px 13px; font-size: 11px; color: var(--muted); }
+  .caret { width: 1.5px; height: 12px; background: var(--green); border-radius: 1px; animation: onaCaret 1.1s steps(1,end) infinite; display: inline-block; margin-left: 2px; }
+  .send { width: 38px; height: 38px; border-radius: 12px; background: var(--green); display: flex; align-items: center; justify-content: center; }
+</style>

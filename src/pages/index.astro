@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import StatStrip from '../components/StatStrip.astro';
+import Features from '../components/Features.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Benefits from '../components/Benefits.astro';
+import FAQ from '../components/FAQ.astro';
+import CTABand from '../components/CTABand.astro';
+import Footer from '../components/Footer.astro';
+import DownloadModal from '../components/DownloadModal.astro';
+import Interactions from '../components/Interactions.astro';
+---
+<BaseLayout>
+  <div class="page">
+    <Nav />
+    <main>
+      <Hero />
+      <StatStrip />
+      <Features />
+      <HowItWorks />
+      <Benefits />
+      <FAQ />
+      <CTABand />
+    </main>
+    <Footer />
+  </div>
+  <DownloadModal />
+  <Interactions />
+</BaseLayout>
+
+<style>
+  .page {
+    font-family: var(--font-body), sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    overflow-x: hidden;
+  }
+</style>

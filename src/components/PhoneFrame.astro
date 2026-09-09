@@ -1,0 +1,57 @@
+---
+import PhoneSkeleton from './PhoneSkeleton.astro';
+
+interface Props {
+  size?: 'hero' | 'feature';
+  class?: string;
+}
+
+const { size = 'feature', class: className } = Astro.props;
+---
+<div class:list={['phone', size, className]}>
+  <div class="bezel">
+    <div class="screen">
+      <PhoneSkeleton />
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style>
+  .phone {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .phone.feature {
+    max-width: 296px;
+  }
+  .phone.hero {
+    max-width: 380px;
+  }
+  .bezel {
+    width: 100%;
+    background: #16171A;
+    box-shadow: 0 34px 60px -28px rgba(18, 58, 44, .5);
+  }
+  .phone.feature .bezel {
+    border-radius: 44px;
+    padding: 8px;
+    animation: onaFloat 7s ease-in-out infinite;
+  }
+  .phone.hero .bezel {
+    border-radius: 46px;
+    padding: 9px;
+    box-shadow: 0 50px 90px -30px rgba(0, 0, 0, .65);
+  }
+  .screen {
+    background: var(--paper);
+    overflow: hidden;
+    aspect-ratio: 9 / 19.3;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .phone.feature .screen { border-radius: 37px; }
+  .phone.hero .screen { border-radius: 38px; }
+</style>

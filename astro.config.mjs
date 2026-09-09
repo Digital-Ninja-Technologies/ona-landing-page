@@ -2,8 +2,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
-// Update if a custom domain is attached in Vercel later.
-const SITE_URL = 'https://ona-landing-page-navy.vercel.app';
+const SITE_URL = 'https://ona.thedigitalninjatech.com';
 
 export default defineConfig({
   site: SITE_URL,

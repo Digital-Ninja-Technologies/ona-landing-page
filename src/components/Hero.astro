@@ -183,15 +183,16 @@ const places = [
     font-weight: 300;
     text-wrap: pretty;
   }
-  /* nowrap + equal-share flex children: the two store badges always sit
-     side by side, shrinking their own padding/type (below) rather than
-     the row wrapping to two lines on narrow phones. */
+  /* nowrap + shrink-only children: the two store badges always sit side
+     by side at their natural pill width (no flex-grow, so they don't
+     stretch to fill the row on wide screens), shrinking their own
+     padding/type (below) only once space actually runs out on phones. */
   .store-badges { display: flex; gap: 12px; flex-wrap: nowrap; }
   .badge {
     display: flex;
     align-items: center;
     gap: 10px;
-    flex: 1 1 0;
+    flex: 0 1 auto;
     min-width: 0;
     border: 1px solid rgba(237, 225, 203, .3);
     border-radius: 14px;

@@ -11,22 +11,20 @@ import LogoMark from './LogoMark.astro';
       <a href="#features">Features</a>
       <a href="#how">How it works</a>
       <a href="#faq">FAQ</a>
+      <button type="button" class="nav-download" data-open-download>Download</button>
     </div>
 
-    <div class="nav-actions">
-      <button type="button" class="nav-download" data-open-download>Download</button>
-      <button
-        type="button"
-        class="nav-toggle"
-        data-nav-toggle
-        aria-expanded="false"
-        aria-controls="nav-links"
-        aria-label="Toggle menu"
-      >
-        <svg class="icon-burger" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EDE1CB" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
-        <svg class="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EDE1CB" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
-      </button>
-    </div>
+    <button
+      type="button"
+      class="nav-toggle"
+      data-nav-toggle
+      aria-expanded="false"
+      aria-controls="nav-links"
+      aria-label="Toggle menu"
+    >
+      <svg class="icon-burger" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EDE1CB" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      <svg class="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EDE1CB" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </button>
   </div>
 </nav>
 
@@ -66,13 +64,6 @@ import LogoMark from './LogoMark.astro';
     opacity: 1;
   }
 
-  .nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex: 0 0 auto;
-  }
-
   .nav-download {
     font-family: var(--font-display);
     font-size: 14px;
@@ -107,12 +98,11 @@ import LogoMark from './LogoMark.astro';
   .nav-toggle[aria-expanded="true"] .icon-burger { display: none; }
   .nav-toggle[aria-expanded="true"] .icon-close { display: block; }
 
-  /* Below this width the link row becomes a dropdown panel opened by
-     .nav-toggle, so the top row always stays a single line: logo,
-     Download, hamburger. */
+  /* Below this width the link row (including the Download capsule) moves
+     into a dropdown panel opened by .nav-toggle, so the top row always
+     stays a single line: logo, hamburger. */
   @media (max-width: 760px) {
     .nav-inner { gap: 10px; }
-    .nav-download { padding: 10px 16px; font-size: 12.5px; }
     .nav-toggle { display: flex; }
 
     .nav-links {
@@ -126,7 +116,7 @@ import LogoMark from './LogoMark.astro';
       background: rgba(18, 58, 44, .98);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(237, 225, 203, .12);
-      padding: 4px 24px 14px;
+      padding: 4px 24px 18px;
       opacity: 0;
       transform: translateY(-8px);
       pointer-events: none;
@@ -141,6 +131,14 @@ import LogoMark from './LogoMark.astro';
       padding: 13px 0;
       border-top: 1px solid rgba(237, 225, 203, .1);
       opacity: .9;
+    }
+    /* The Download capsule sits inside the panel too, set apart from the
+       plain links as the row's one filled, full-width action. */
+    .nav-links .nav-download {
+      margin-top: 14px;
+      width: 100%;
+      text-align: center;
+      padding: 13px 20px;
     }
   }
 </style>

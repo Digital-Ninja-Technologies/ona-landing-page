@@ -78,7 +78,8 @@
       const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
       if (isOpen) closeMenu(); else openMenu();
     });
-    navLinks.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
+    // Includes the Download button, which now lives inside the panel too.
+    navLinks.querySelectorAll('a, button').forEach((el) => el.addEventListener('click', closeMenu));
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') closeMenu();
     });

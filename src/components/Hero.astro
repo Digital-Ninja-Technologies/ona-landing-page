@@ -183,11 +183,16 @@ const places = [
     font-weight: 300;
     text-wrap: pretty;
   }
-  .store-badges { display: flex; gap: 12px; flex-wrap: wrap; }
+  /* nowrap + equal-share flex children: the two store badges always sit
+     side by side, shrinking their own padding/type (below) rather than
+     the row wrapping to two lines on narrow phones. */
+  .store-badges { display: flex; gap: 12px; flex-wrap: nowrap; }
   .badge {
     display: flex;
     align-items: center;
     gap: 10px;
+    flex: 1 1 0;
+    min-width: 0;
     border: 1px solid rgba(237, 225, 203, .3);
     border-radius: 14px;
     padding: 10px 18px;
@@ -198,8 +203,24 @@ const places = [
     border-color: var(--gold);
     background: rgba(237, 225, 203, .06);
   }
-  .badge-eyebrow { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--sand); opacity: .6; }
-  .badge-name { font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--sand); }
+  .badge svg { flex: 0 0 auto; }
+  .badge-eyebrow {
+    font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--sand); opacity: .6;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .badge-name {
+    font-family: var(--font-display); font-size: 16px; font-weight: 600; color: var(--sand);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  /* Two badges in one row at any width: shrink padding, icon, and type
+     together rather than letting the row wrap or the text overflow. */
+  @media (max-width: 400px) {
+    .badge { gap: 7px; padding: 9px 10px; }
+    .badge svg { width: 16px; height: auto; }
+    .badge-eyebrow { font-size: 8.5px; }
+    .badge-name { font-size: 13px; }
+  }
 
   .hero-phone-slot {
     /* No grow: the phone inside is already capped at max-width:380px, so

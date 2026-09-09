@@ -62,6 +62,39 @@
     }
   }
 
+  // ---- Mobile nav menu ---------------------------------------------------
+  const navToggle = document.querySelector<HTMLButtonElement>('[data-nav-toggle]');
+  const navLinks = document.getElementById('nav-links');
+  if (navToggle && navLinks) {
+    const closeMenu = () => {
+      navToggle.setAttribute('aria-expanded', 'false');
+      navLinks.classList.remove('is-open');
+    };
+    const openMenu = () => {
+      navToggle.setAttribute('aria-expanded', 'true');
+      navLinks.classList.add('is-open');
+    };
+    navToggle.addEventListener('click', () => {
+      const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+      if (isOpen) closeMenu(); else openMenu();
+    });
+    navLinks.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+    document.addEventListener('click', (e) => {
+      const target = e.target as Node;
+      if (navToggle.getAttribute('aria-expanded') !== 'true') return;
+      if (navToggle.contains(target) || navLinks.contains(target)) return;
+      closeMenu();
+    });
+    // A resize past the mobile breakpoint (e.g. rotating a tablet) must not
+    // leave the dropdown state armed once it's rendered inline again.
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 760) closeMenu();
+    });
+  }
+
   // ---- Download dialog --------------------------------------------------
   const dialog = document.querySelector<HTMLDialogElement>('#download-modal');
   if (dialog) {
